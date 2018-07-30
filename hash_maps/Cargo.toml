@@ -1,0 +1,7 @@
+[package]
+name = "hash_maps"
+version = "0.1.0"
+authors = ["iosmanthus <myosmanthustree@gmail.com>"]
+
+[dependencies]
+rand = "0.4.2"
