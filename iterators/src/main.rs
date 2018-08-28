@@ -1,27 +1,8 @@
-struct Counter {
-    count: u32,
-}
-impl Counter {
-    pub fn new() -> Counter {
-        Counter { count: 0 }
-    }
-}
-impl Iterator for Counter {
-    type Item = u32;
-    fn next(&mut self) -> Option<Self::Item> {
-        self.count += 1;
-        if self.count < 6 {
-            Some(self.count)
-        } else {
-            None
-        }
-    }
-}
 fn main() {
-    let v: u32 = Counter::new()
-        .zip(Counter::new().skip(1))
-        .map(|(a, b)| a * b)
-        .filter(|x| x % 3 == 0)
-        .sum();
-    println!("{:?}", v);
+    let s = "how many roads must a man walk down\n"
+        .trim()
+        .split_whitespace();
+    for w in s {
+        println!("{}", w);
+    }
 }
