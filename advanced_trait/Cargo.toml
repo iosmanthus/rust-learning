@@ -1,0 +1,6 @@
+[package]
+name = "advanced_trait"
+version = "0.1.0"
+authors = ["iosmanthus <MyOsmanthusTree@gmail.com>"]
+
+[dependencies]
