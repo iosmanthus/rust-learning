@@ -2,9 +2,10 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 fn main() {
-    let mx = Arc::new(Mutex::new(5));
-    let my = Arc::new(Mutex::new(10));
+    let mx = Arc::new(Mutex::new(()));
+    let my = Arc::new(Mutex::new(()));
     let mut handles = vec![];
+
     {
         let mx = Arc::clone(&mx);
         let my = Arc::clone(&my);
@@ -13,6 +14,7 @@ fn main() {
             let _vy = my.lock().unwrap();
         }));
     }
+
     {
         let mx = Arc::clone(&mx);
         let my = Arc::clone(&my);
@@ -21,6 +23,7 @@ fn main() {
             let _vx = mx.lock().unwrap();
         }));
     }
+
     for handle in handles {
         handle.join().unwrap();
     }
