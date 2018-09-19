@@ -6,6 +6,25 @@ struct Point {
     y: i32,
 }
 
+trait Distance<T> {
+    fn distance(&self, remote: &T) -> u32;
+}
+
+impl Distance<(i32, i32)> for Point {
+    fn distance(&self, remote: &(i32, i32)) -> u32 {
+        let h = (self.x - remote.0).abs();
+        let v = (self.y - remote.1).abs();
+        (h.pow(2) + v.pow(2)) as u32
+    }
+}
+impl Distance<Point> for Point {
+    fn distance(&self, remote: &Point) -> u32 {
+        let h = (self.x - remote.x).abs();
+        let v = (self.y - remote.y).abs();
+        (h.pow(2) + v.pow(2)) as u32
+    }
+}
+
 impl Point {
     pub fn new(x: i32, y: i32) -> Point {
         Point { x, y }
@@ -30,6 +49,12 @@ fn main() {
     let a = Point::new(1, 2);
     let b = Point::new(-1, -2);
     let c = a + b;
-    println!("{:?}", c);
-    println!("{:?}", c + (2, 3));
+
+    println!("c = {:?}", c);
+
+    let d = c + (2, 3);
+    println!("d = {:?}", d);
+
+    println!("|d -> (1, 2)| = {}", d.distance(&(1, 2)));
+    println!("|d -> d| = {}", d.distance(&d));
 }
