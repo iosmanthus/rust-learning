@@ -6,22 +6,29 @@ struct Point {
     y: i32,
 }
 
+trait SquareSum<T = Self> {
+    fn square_sum(lhs: T, rhs: T) -> T;
+}
+
 trait Distance<T> {
-    fn distance(&self, remote: &T) -> u32;
+    fn distance(&self, remote: &T) -> i32;
+}
+
+impl SquareSum for i32 {
+    fn square_sum(lhs: i32, rhs: i32) -> i32 {
+        lhs.pow(2) + rhs.pow(2)
+    }
 }
 
 impl Distance<(i32, i32)> for Point {
-    fn distance(&self, remote: &(i32, i32)) -> u32 {
-        let h = (self.x - remote.0).abs();
-        let v = (self.y - remote.1).abs();
-        (h.pow(2) + v.pow(2)) as u32
+    fn distance(&self, remote: &(i32, i32)) -> i32 {
+        <i32 as SquareSum>::square_sum(self.x - remote.0, self.y - remote.1)
     }
 }
+
 impl Distance<Point> for Point {
-    fn distance(&self, remote: &Point) -> u32 {
-        let h = (self.x - remote.x).abs();
-        let v = (self.y - remote.y).abs();
-        (h.pow(2) + v.pow(2)) as u32
+    fn distance(&self, remote: &Point) -> i32 {
+        <i32 as SquareSum>::square_sum(self.x - remote.x, self.y - remote.y)
     }
 }
 
