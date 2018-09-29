@@ -1,16 +1,17 @@
-#[derive(Debug, PartialEq)]
-struct Foo(String);
+#[derive(Debug)]
+struct Foo {
+    a: i32,
+    b: i32,
+    c: i32,
+}
 
-#[derive(Debug, PartialEq)]
-enum Bar {
-    Variant1(i32),
-    Variant2(i32),
+impl Default for Foo {
+    fn default() -> Self {
+        Foo { a: 1, b: 2, c: 3 }
+    }
 }
 
 fn main() {
-    let bar1_1 = Bar::Variant1(1);
-    let bar1_2 = Bar::Variant1(1);
-    assert_eq!(bar1_1, bar1_2);
-    let bar2 = Bar::Variant2(1);
-    assert_eq!(bar1_1, bar2);
+    let foo: Option<Foo> = None;
+    println!("{:?}", foo.unwrap_or_default());
 }
