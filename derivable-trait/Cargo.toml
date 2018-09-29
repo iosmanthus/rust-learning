@@ -1,0 +1,6 @@
+[package]
+name = "derivable-trait"
+version = "0.1.0"
+authors = ["iosmanthus <myosmanthustree@gmail.com>"]
+
+[dependencies]
